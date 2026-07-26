@@ -1,43 +1,61 @@
-About pngquant
-==============
+About pngquant-feedstock
+========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pngquant-feedstock/blob/main/LICENSE.txt)
 
 Home: https://pngquant.org/
 
 Package license: GPL-3.0-or-later
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pngquant-feedstock/blob/master/LICENSE.txt)
+Summary: Lossy PNG compressor — converts 24/32-bit PNGs to efficient 8-bit palette images with alpha
 
-Summary: Lossy PNG compressor — pngquant command based on libimagequant library 
+Development: https://github.com/kornelski/pngquant
+
+pngquant converts 24/32-bit RGBA PNG images to 8-bit palette images with
+an alpha channel, typically reducing file size by 60-80% while remaining
+fully standards-compliant and readable by every PNG decoder. Quantization
+is performed by libimagequant.
+
+As of pngquant 3.x the command-line tool is built with Rust (the image
+quantization core and PNG I/O remain C, linked in via imagequant-sys and
+libpng-sys).
 
 Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>GitHub Actions</td>
+    <td>
+      <a href="https://github.com/conda-forge/pngquant-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/pngquant-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
+    </td>
+  </tr>
     
   <tr>
     <td>Azure</td>
     <td>
       <details>
         <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12013&branchName=master">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pngquant-feedstock?branchName=master">
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12013&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pngquant-feedstock?branchName=main">
           </a>
         </summary>
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64</td>
+              <td>osx_64</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12013&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pngquant-feedstock?branchName=master&jobName=linux&configuration=linux_64_" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12013&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pngquant-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64</td>
+              <td>win_64</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12013&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pngquant-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12013&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/pngquant-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -65,16 +83,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `pngquant` can be installed with:
+Once the `conda-forge` channel has been enabled, `pngquant` can be installed with `conda`:
 
 ```
 conda install pngquant
 ```
 
-It is possible to list all of the versions of `pngquant` available on your platform with:
+or with `mamba`:
+
+```
+mamba install pngquant
+```
+
+It is possible to list all of the versions of `pngquant` available on your platform with `conda`:
 
 ```
 conda search pngquant --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search pngquant --channel conda-forge
+```
+
+Alternatively, `mamba repoquery` may provide more information:
+
+```
+# Search all versions available on your platform:
+mamba repoquery search pngquant --channel conda-forge
+
+# List packages depending on `pngquant`:
+mamba repoquery whoneeds pngquant --channel conda-forge
+
+# List dependencies of `pngquant`:
+mamba repoquery depends pngquant --channel conda-forge
 ```
 
 
@@ -92,17 +135,19 @@ for each of the installable packages. Such a repository is known as a *feedstock
 A feedstock is made up of a conda recipe (the instructions on what and how to build
 the package) and the necessary configurations for automatic building using freely
 available continuous integration services. Thanks to the awesome service provided by
-[CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/)
-and [TravisCI](https://travis-ci.com/) it is possible to build and upload installable
-packages to the [conda-forge](https://anaconda.org/conda-forge)
-[Anaconda-Cloud](https://anaconda.org/) channel for Linux, Windows and OSX respectively.
+[Azure](https://azure.microsoft.com/en-us/services/devops/), [GitHub](https://github.com/),
+[CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
+[Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
+it is possible to build and upload installable packages to the
+[conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
+channel for Linux, Windows and OSX respectively.
 
-To manage the continuous integration and simplify feedstock maintenance
+To manage the continuous integration and simplify feedstock maintenance,
 [conda-smithy](https://github.com/conda-forge/conda-smithy) has been developed.
 Using the ``conda-forge.yml`` within this repository, it is possible to re-render all of
 this feedstock's supporting files (e.g. the CI configuration files) with ``conda smithy rerender``.
 
-For more information please check the [conda-forge documentation](https://conda-forge.org/docs/).
+For more information, please check the [conda-forge documentation](https://conda-forge.org/docs/).
 
 Terminology
 ===========
@@ -129,7 +174,7 @@ merged, the recipe will be re-built and uploaded automatically to the
 everybody to install and use from the `conda-forge` channel.
 Note that all branches in the conda-forge/pngquant-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
-on branches in forks and branches in the main repository should only be used to
+on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.
 
 In order to produce a uniquely identifiable distribution:
@@ -143,4 +188,5 @@ Feedstock Maintainers
 =====================
 
 * [@izahn](https://github.com/izahn/)
+* [@rxm7706](https://github.com/rxm7706/)
 
