@@ -1,3 +1,7 @@
+build_platform:
+  osx_64: osx_arm64
+provider:
+  osx_arm64: default
 conda_build:
   error_overlinking: true
 conda_install_tool: pixi
