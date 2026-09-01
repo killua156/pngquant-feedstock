@@ -1,6 +1,16 @@
+build_platform:
+  osx_64: osx_arm64
+provider:
+  osx_arm64: default
+conda_build:
+  error_overlinking: true
+conda_install_tool: pixi
+conda_build_tool: rattler-build
 conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
-conda_build:
-  pkg_format: '2'
+test: native_and_emulated
+bot:
+  automerge: true
+  check_solvable: true
