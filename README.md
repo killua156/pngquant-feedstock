@@ -232,5 +232,8 @@ Feedstock Maintainers
 =====================
 
 * [@izahn](https://github.com/izahn/)
+* [@killua156](https://github.com/killua156/)
+* [@owenlamont](https://github.com/owenlamont/)
 * [@rxm7706](https://github.com/rxm7706/)
+* [@soapy1](https://github.com/soapy1/)
 
